@@ -26,12 +26,12 @@ services:
     cap_add:
     - SYS_PTRACE
     container_name: ${USER_NAME:-default}_ai_tutorial_python
-    deploy:
-      resources:
-        reservations:
-          devices:
-          - capabilities:
-            - gpu
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #       - capabilities:
+    #         - gpu
     env_file: .env
     environment:
     - ENVIRONMENT=${ENVIRONMENT}
@@ -81,5 +81,16 @@ services:
     restart: always
     volumes:
     - ../applications/streamlit:/usr/src/ai_tutorial/applications/streamlit
+  # simple_container:
+  #   build: 
+  #     context: ..
+  #     dockerfile: docker/python.Dockerfile
+  #   container_name: ${USER_NAME:-default}_simple_container
+  #   env_file: .env
+  #   image: simple_container
+  #   networks:
+  #   - ai_tutorial-network
+  #   volumes:
+  #   - ${DATA_DIR}:/usr/src/ai_tutorial/data
 volumes:
   ai_tutorial-secret: null
